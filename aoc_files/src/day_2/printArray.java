@@ -1,3 +1,5 @@
+package day_2;
+
 public class printArray {
     public static void string (String [] STRING) {
         System.out.print("[ ");
