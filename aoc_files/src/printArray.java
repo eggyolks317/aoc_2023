@@ -1,6 +1,4 @@
 public class printArray {
-    public int[] INT;
-    public String[] STRING;
     public static void string (String [] STRING) {
         System.out.print("[ ");
         for (String x:STRING) {
