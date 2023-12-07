@@ -1,148 +1,15 @@
 package day_2;
 
+import java.util.Arrays;
+
 public class day2_p1 {
     public static void main(String[] args) {
-        String[] input = common.stringArr(storeInput());
-        int sum = 0;
-        int y = 0;
-        int temp = 0;
-        for (int x = 0; x < input.length*4; x++) {
-            String tem = "";
-            tem = Integer.toString(temp);
-            if (presentSym(input,x, numIndex(input[x])[0], numIndex(input[x])[1] )) {
-                System.out.println(presentSym(input,x, numIndex(input[x])[0], numIndex(input[x])[1] ));
-                if (numIndex(input[x])[1] == 1){
-                    temp = input[x].charAt(numIndex(input[x])[0])-48;
-                    System.out.println(temp);
-                    sum += input[x].charAt(numIndex(input[x])[0])-48;
-                }
-                else if (numIndex(input[x])[1] == 2){
-                    temp = input[x].charAt(numIndex(input[x])[0])-48;
-                    System.out.println(temp);
-                    sum += (input[x].charAt(numIndex(input[x])[0])-48) + (input[x].charAt(numIndex(input[x])[0]+1)-48);
 
-                }
-                else if (numIndex(input[x])[1] == 3){
-                    temp = input[x].charAt(numIndex(input[x])[0])-48;
-                    System.out.println(temp);
-                    sum += (input[x].charAt(numIndex(input[x])[0])-48) + (input[x].charAt(numIndex(input[x])[0]+1)-48) +  (input[x].charAt(numIndex(input[x])[0]+2)-48);
-                }
-                input[x].replace(tem, ".");
-            }
-            if (y <= 4 && x == input.length-2) {
-                x = 0;
-                System.out.println();
-                System.out.println();
-                System.out.println("new");
-                System.out.println();
-                System.out.println();
-                y ++;
-            }
-            else if (y > 4) {
-                break;
-            }
-            System.out.println("input index: " + x);
 
-        }
-        System.out.println("sum :" + sum);
 
     }
 
-    private static int[] numIndex (String string) {
-
-        int i = -1;
-        int count = 0;
-        String [] temp = string.split("");
-        for (int x = 0; x<string.length(); x++) {
-            if (common.isNumber(string.charAt(x))&& common.isNumber(string.charAt(x+1))&& common.isNumber(string.charAt(x+2))) {
-                i = x;
-                count = 3;
-
-            }
-            else if (common.isNumber(string.charAt(x))&& common.isNumber(string.charAt(x+1))) {
-                i = x;
-                count = 2;
-            }
-            else if (common.isNumber(string.charAt(x))) {
-                i = x;
-                count = 2;
-            }
-            if (i != -1) {
-                return new int []{i, count};
-            }
-        }
-        return new int []{i, count};
-    }
-    private static boolean presentSym (String[] input, int inputi, int linei, int range) {
-        System.out.println(input[inputi]);
-        if (inputi == 0) {
-            //check for bottom
-            if (range < 2 && common.isSymbol(input[inputi + 1].charAt(linei))) {
-                return true;
-            }
-            else if (range < 3 && common.isSymbol(input[inputi + 1].charAt(linei + 1))) {
-                return true;
-            }
-            else if (common.isSymbol(input[inputi + 1].charAt(linei + 2)) && range < 4) {
-                return true;
-            }
-        }
-        else if (inputi < 98) {
-            //check for bottom
-            if (range < 2 && common.isSymbol(input[inputi + 1].charAt(linei))) {
-                return true;
-            }
-            else if (range < 3 && common.isSymbol(input[inputi + 1].charAt(linei + 1))) {
-                return true;
-            }
-            else if (range < 4 && common.isSymbol(input[inputi + 1].charAt(linei + 2))) {
-                return true;
-            }
-            //check for top
-            else if (range < 2 && common.isSymbol(input[inputi - 1].charAt(linei))) {
-                return true;
-            }
-            else if (range < 3 && common.isSymbol(input[inputi - 1].charAt(linei + 1))) {
-                return true;
-            }
-            else if (range < 4 && common.isSymbol(input[inputi - 1].charAt(linei + 2))) {
-                return true;
-            }
-        }
-        else if (inputi == 99) {System.out.println(input[inputi].charAt(linei + range));
-            //check for top
-            if (range < 2 && common.isSymbol(input[inputi - 1].charAt(linei))) {
-                return true;
-            }
-            else if (range < 3 && common.isSymbol(input[inputi - 1].charAt(linei + 1))) {
-                return true;
-            }
-            else if (range < 4 && common.isSymbol(input[inputi - 1].charAt(linei + 2))) {
-                return true;
-            }
-            else return false; }
-        //check for left hand side
-        if (linei != 0 && common.isSymbol(input[inputi].charAt(linei - 1))) {
-            return true;
-        }
-        //check for diagonal (right)
-        else if (linei + range < 140 && common.isSymbol(input[inputi + 1].charAt(linei + range))) {
-            return true;
-        }
-        //check for diagonal (left)
-        else if (linei != 0 && common.isSymbol(input[inputi + 1].charAt(linei - 1))) {
-            return true;
-        }
-        //check for right hand side
-        else if (linei + range < 140 && common.isSymbol(input[inputi].charAt(linei + range))) {
-            return true;
-        }
-        System.out.println("not checked: " + input[inputi].charAt(linei));
-        return false;
-        //check for left hand side
-
-    }
-    private static String storeInput () {
+    private static String input () {
         return "............830..743.......59..955.......663..........................................367...........895....899...............826...220......\n" +
                 ".......284.....*..........,..*.....$...+.....*...377..................*.......419.............488...*.......*...................*..-....939..\n" +
                 "....%.........976..679.461.7..........350..33.........$.380...$...151.897..........295..#......*....105.....418.............481........&....\n" +
@@ -284,4 +151,6 @@ public class day2_p1 {
                 "...........919*.....................................*.......234.........492..%...........300...........301........./866..........*..........\n" +
                 "...............470.....440.874...116....240........299......................27......409.......................................639.136.......";
     }
+
+
 }
